@@ -85,7 +85,7 @@
 
   <div class="flex gap-4 mt-10">
     <button class="bg-violet-600 hover:bg-violet-700 px-6 py-3 rounded-lg shadow-lg">
-      Download CV
+      Download CV Winky
     </button>
     <a href="{{ route('project') }}"
        class="border border-slate-600 hover:border-violet-500 px-6 py-3 rounded-lg transition">
