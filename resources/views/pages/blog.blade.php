@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Blog — Winky Tio Pratama</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@extends('layouts.app')
 
-<body class="min-h-screen bg-[#070711] text-slate-100">
+@section('title', 'Blog')
 
-  <!-- BACKGROUND GLOW -->
-  <div class="fixed inset-0 -z-10">
-    <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-violet-600/30 rounded-full blur-[140px]"></div>
-    <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[140px]"></div>
-  </div>
-
-  <!-- NAVBAR -->
-  <nav class="flex items-center justify-between px-12 py-6">
-    <h1 class="text-xl font-bold text-violet-400">WinkyCreative</h1>
-
-    <ul class="hidden md:flex gap-10 text-slate-300">
-      <li class="hover:text-white"><a href="{{ route('welcome') }}">Home</a></li>
-      <li class="hover:text-white"><a href="{{ route('about') }}">About</a></li>
-      <li class="hover:text-white"><a href="{{ route('project') }}">Project</a></li>
-      <li class="text-white font-semibold"><a href="{{ route('blog') }}">Blog</a></li>
-    </ul>
-
-    <a href="{{ route('welcome') }}"
-       class="border border-violet-500/40 hover:bg-violet-600/20 px-5 py-2 rounded-lg text-sm transition">
-      Back
-    </a>
-  </nav>
-
+@section('content')
   <!-- HEADER -->
   <section class="px-12 pt-16 pb-20 text-center">
     <h2 class="text-4xl md:text-5xl font-extrabold">
@@ -126,10 +97,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-white/10 py-6 text-center text-slate-500 text-sm">
-    © 2026 <span class="text-violet-400">Winky Tio Pratama</span>. All Rights Reserved.
-  </footer>
 
-</body>
-</html>
+
+@endsection

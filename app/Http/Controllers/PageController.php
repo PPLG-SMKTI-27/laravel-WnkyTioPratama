@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Project;
 
 class PageController extends Controller
 {
@@ -21,8 +21,14 @@ class PageController extends Controller
         return view('pages.blog');
     }
 
+    // ⭐ INI YANG PALING PENTING
     public function project()
     {
-        return view('pages.project');
+        $projects = Project::where('is_published', true)
+            ->orderBy('sort_order')
+            ->orderByDesc('id')
+            ->get();
+
+        return view('pages.project', compact('projects'));
     }
 }

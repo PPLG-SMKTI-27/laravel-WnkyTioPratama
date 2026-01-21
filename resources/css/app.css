@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* THEME GLOBAL */
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+@layer components {
+  .wc-bg {
+    @apply min-h-screen bg-[radial-gradient(1200px_circle_at_20%_10%,rgba(124,58,237,0.25),transparent_45%),radial-gradient(900px_circle_at_80%_30%,rgba(168,85,247,0.18),transparent_50%),radial-gradient(900px_circle_at_40%_90%,rgba(59,130,246,0.12),transparent_55%)] bg-slate-950;
+  }
+
+  .wc-card {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/30;
+  }
+
+  .wc-input {
+    @apply w-full rounded-xl border border-white/10 bg-white/5 text-slate-100 placeholder:text-slate-400
+           focus:border-violet-400/60 focus:ring-violet-500/20 focus:ring-4;
+  }
+
+  .wc-btn {
+    @apply inline-flex items-center justify-center rounded-xl bg-violet-600 px-4 py-2 font-semibold text-white
+           hover:bg-violet-700 focus:outline-none focus:ring-4 focus:ring-violet-500/30 transition;
+  }
+
+  .wc-link {
+    @apply text-violet-300 hover:text-violet-200 underline-offset-4 hover:underline;
+  }
+}
