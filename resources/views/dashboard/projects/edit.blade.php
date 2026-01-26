@@ -1,28 +1,21 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Edit Project')
-
 @section('content')
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-
-  <div class="wc-card p-6">
-    <div class="flex items-start justify-between gap-4">
-      <div>
-        <h1 class="text-2xl font-bold">Edit Project</h1>
-        <p class="text-slate-300 mt-1">Ubah data project portfolio.</p>
-      </div>
-
-      <a href="{{ route('dashboard.projects.index') }}"
-         class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-semibold text-white hover:bg-white/10 transition">
-        ← Back
-      </a>
-    </div>
+<div class="p-6 text-white max-w-2xl">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Edit Project</h1>
+    <a href="{{ route('dashboard.projects.index') }}" class="text-indigo-200 hover:underline">← Back</a>
   </div>
 
+  @if(session('success'))
+    <div class="mt-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-100">
+      {{ session('success') }}
+    </div>
+  @endif
+
   @if ($errors->any())
-    <div class="wc-card p-5 border border-red-500/30 bg-red-500/10">
-      <p class="font-semibold text-red-200 mb-2">Ada error:</p>
-      <ul class="list-disc pl-5 text-sm text-red-100 space-y-1">
+    <div class="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-red-100">
+      <ul class="list-disc pl-5">
         @foreach ($errors->all() as $error)
           <li>{{ $error }}</li>
         @endforeach
@@ -30,23 +23,49 @@
     </div>
   @endif
 
-  <div class="wc-card p-6">
-    <form method="POST" action="{{ route('dashboard.projects.update', $project) }}" class="space-y-5">
-      @csrf
-      @method('PUT')
+  <form class="mt-6 space-y-4" method="POST" action="{{ route('dashboard.projects.update', $project) }}">
+    @csrf
+    @method('PUT')
 
-      @include('dashboard.projects._form', ['project' => $project])
+    <div>
+      <label class="block text-sm text-slate-300 mb-1">Title</label>
+      <input name="title" value="{{ old('title', $project->title) }}" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2" required>
+    </div>
 
-      <div class="flex flex-wrap gap-3 pt-2">
-        <button type="submit" class="wc-btn">Update</button>
+    <div>
+      <label class="block text-sm text-slate-300 mb-1">Slug</label>
+      <input name="slug" value="{{ old('slug', $project->slug) }}" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2">
+    </div>
 
-        <a href="{{ route('dashboard.projects.index') }}"
-           class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-semibold text-white hover:bg-white/10 transition">
-          Cancel
-        </a>
+    <div>
+      <label class="block text-sm text-slate-300 mb-1">Excerpt</label>
+      <textarea name="excerpt" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2" rows="4">{{ old('excerpt', $project->excerpt) }}</textarea>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-slate-300 mb-1">Demo URL</label>
+        <input name="demo_url" value="{{ old('demo_url', $project->demo_url) }}" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2">
       </div>
-    </form>
-  </div>
+      <div>
+        <label class="block text-sm text-slate-300 mb-1">Repo URL</label>
+        <input name="repo_url" value="{{ old('repo_url', $project->repo_url) }}" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2">
+      </div>
+    </div>
 
+    <div class="grid md:grid-cols-2 gap-4 items-center">
+      <div>
+        <label class="block text-sm text-slate-300 mb-1">Sort Order</label>
+        <input type="number" name="sort_order" value="{{ old('sort_order', $project->sort_order) }}" class="w-full rounded-lg bg-white/5 border border-white/10 px-3 py-2">
+      </div>
+
+      <label class="flex items-center gap-2 mt-6 md:mt-0">
+        <input type="checkbox" name="is_published" value="1" class="rounded" @checked(old('is_published', $project->is_published))>
+        <span class="text-slate-200">Published</span>
+      </label>
+    </div>
+
+    <button class="rounded-xl bg-indigo-600 px-4 py-2 font-semibold hover:bg-indigo-500">Save Changes</button>
+  </form>
 </div>
 @endsection

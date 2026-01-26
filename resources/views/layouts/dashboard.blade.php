@@ -16,13 +16,13 @@
 
             {{-- Brand + Desktop nav --}}
             <div class="flex items-center gap-4">
-                <a href="{{ route('dashboard.index') }}" class="font-bold text-white">
+                <a href="{{ route('dashboard') }}" class="font-bold text-white">
                     Winky Creative
                 </a>
 
                 {{-- Desktop nav (cuma Dashboard) --}}
                 <nav class="hidden md:flex items-center gap-4 text-sm text-white/80">
-                    <a href="{{ route('dashboard.index') }}" class="hover:text-indigo-200">
+                    <a href="{{ route('dashboard') }}" class="hover:text-indigo-200">
                         Dashboard
                     </a>
                 </nav>
@@ -30,7 +30,7 @@
 
             {{-- Right actions (desktop) --}}
             <div class="hidden md:flex items-center gap-4 text-sm text-white/80">
-                <a href="{{ route('project') }}" class="hover:text-indigo-200">
+                <a href="{{ route('project.index') }}" class="hover:text-indigo-200">
                     View site →
                 </a>
 
@@ -56,7 +56,7 @@
         {{-- Mobile dropdown menu --}}
         <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-indigo-600/50 backdrop-blur">
             <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-3 space-y-2 text-sm text-white/90">
-                <a href="{{ route('dashboard.index') }}" class="block rounded-lg px-3 py-2 hover:bg-white/10">
+                <a href="{{ route('dashboard') }}" class="block rounded-lg px-3 py-2 hover:bg-white/10">
                     Dashboard
                 </a>
 
@@ -68,7 +68,7 @@
                     + New Project
                 </a>
 
-                <a href="{{ route('project') }}" class="block rounded-lg px-3 py-2 hover:bg-white/10">
+                <a href="{{ route('project.index') }}" class="block rounded-lg px-3 py-2 hover:bg-white/10">
                     View site →
                 </a>
 

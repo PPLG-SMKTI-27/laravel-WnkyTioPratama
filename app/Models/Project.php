@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Project extends Model
 {
@@ -18,5 +19,11 @@ class Project extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
+        'sort_order' => 'integer',
     ];
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_published', true);
+    }
 }

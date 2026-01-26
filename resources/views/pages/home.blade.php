@@ -36,7 +36,7 @@
           </p>
 
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href="{{ route('project') }}" class="wc-btn">
+            <a href="{{ route('project.index') }}" class="wc-btn">
               Lihat Portfolio →
             </a>
 
@@ -46,7 +46,7 @@
             </a>
 
             @auth
-              <a href="{{ route('dashboard.index') }}"
+              <a href="{{ route('dashboard') }}"
                  class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-semibold text-white hover:bg-white/10 transition">
                 Dashboard
               </a>
@@ -148,7 +148,7 @@
             <h2 class="text-2xl font-bold">Tech Stack</h2>
             <p class="text-slate-300 text-sm mt-2">Skill yang sering saya pakai untuk bikin project beneran.</p>
           </div>
-          <a href="{{ route('project') }}" class="hidden sm:inline wc-link">Lihat Project →</a>
+          <a href="{{ route('project.index') }}" class="hidden sm:inline wc-link">Lihat Project →</a>
         </div>
 
         <div class="mt-6 grid sm:grid-cols-2 gap-4">
@@ -181,7 +181,7 @@
         </p>
 
         <div class="mt-6 space-y-3">
-          <a href="{{ route('project') }}" class="wc-btn w-full">Browse Portfolio</a>
+          <a href="{{ route('project.index') }}" class="wc-btn w-full">Browse Portfolio</a>
 
           <a href="{{ route('blog') }}"
              class="inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 font-semibold text-white hover:bg-white/10 transition">
@@ -204,7 +204,7 @@
         <h2 class="text-2xl font-bold">Winky Portfolio System</h2>
         <p class="text-slate-300 text-sm mt-2">Public showcase + Owner dashboard untuk kelola konten.</p>
       </div>
-      <a href="{{ route('project') }}" class="hidden sm:inline wc-link">Open /project →</a>
+      <a href="{{ route('project.index') }}" class="hidden sm:inline wc-link">Open /project →</a>
     </div>
 
     <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

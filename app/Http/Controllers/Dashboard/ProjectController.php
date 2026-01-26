@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::orderBy('sort_order')->orderByDesc('id')->get();
+        $projects = Project::orderBy('sort_order')->latest()->paginate(10);
         return view('dashboard.projects.index', compact('projects'));
     }
 
@@ -24,19 +24,33 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
-            'slug' => ['nullable','string','max:255'],
+            'slug' => ['nullable','string','max:255','unique:projects,slug'],
             'excerpt' => ['nullable','string'],
             'demo_url' => ['nullable','url','max:255'],
             'repo_url' => ['nullable','url','max:255'],
-            'is_published' => ['nullable','boolean'],
+            'sort_order' => ['nullable','integer','min:0'],
+            'is_published' => ['nullable'],
         ]);
 
-        $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
+        $data['slug'] = filled($data['slug'] ?? null)
+            ? Str::slug($data['slug'])
+            : Str::slug($data['title']);
+
         $data['is_published'] = $request->boolean('is_published');
+        $data['sort_order'] = (int)($data['sort_order'] ?? 0);
 
-        Project::create($data);
+        $base = $data['slug'];
+        $i = 2;
+        while (Project::where('slug', $data['slug'])->exists()) {
+            $data['slug'] = $base . '-' . $i;
+            $i++;
+        }
 
-        return redirect()->route('dashboard.projects.index')->with('status', 'Project created!');
+        $project = Project::create($data);
+
+        return redirect()
+            ->route('dashboard.projects.edit', $project)
+            ->with('success', 'Project berhasil dibuat.');
     }
 
     public function edit(Project $project)
@@ -48,24 +62,36 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
-            'slug' => ['nullable','string','max:255'],
+            'slug' => ['nullable','string','max:255','unique:projects,slug,'.$project->id],
             'excerpt' => ['nullable','string'],
             'demo_url' => ['nullable','url','max:255'],
             'repo_url' => ['nullable','url','max:255'],
-            'is_published' => ['nullable','boolean'],
+            'sort_order' => ['nullable','integer','min:0'],
+            'is_published' => ['nullable'],
         ]);
 
-        $data['slug'] = $data['slug'] ?: Str::slug($data['title']);
+        $data['slug'] = filled($data['slug'] ?? null)
+            ? Str::slug($data['slug'])
+            : Str::slug($data['title']);
+
         $data['is_published'] = $request->boolean('is_published');
+        $data['sort_order'] = (int)($data['sort_order'] ?? 0);
+
+        $base = $data['slug'];
+        $i = 2;
+        while (Project::where('slug', $data['slug'])->where('id','!=',$project->id)->exists()) {
+            $data['slug'] = $base . '-' . $i;
+            $i++;
+        }
 
         $project->update($data);
 
-        return redirect()->route('dashboard.projects.index')->with('status', 'Project updated!');
+        return back()->with('success', 'Project berhasil diupdate.');
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('dashboard.projects.index')->with('status', 'Project deleted!');
+        return back()->with('success', 'Project berhasil dihapus.');
     }
 }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('repo_url')->nullable();
 
             // Status & ordering
-            $table->boolean('is_published')->default(true);
+            $table->boolean('is_published')->default(false); // ⬅️ PENTING
             $table->unsignedInteger('sort_order')->default(0);
 
             $table->timestamps();
